@@ -2,3 +2,7 @@
     path = godot-cpp
     url = https://github.com/godotengine/godot-cpp.git
     branch = godot-4.1.1-stable
+[submodule "src/hiredis"]
+	path = src/hiredis
+	url = https://github.com/redis/hiredis.git
+    branch = v1.2.0
