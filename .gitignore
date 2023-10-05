@@ -13,3 +13,41 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# VSCode
+# .vscode/*
+# !.vscode/extensions.json
+
+# Binaries
+*.o
+*.os
+*.so
+*.obj
+*.bc
+*.pyc
+*.dblite
+*.pdb
+*.lib
+*.config
+*.creator
+*.creator.user
+*.files
+*.includes
+*.idb
+*.exp
+
+# Other stuff
+*.log
+
+# Ignore library files but not the gdextension file
+demo/addons/gdredis/bin/*
+.sconsign*.dblite
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

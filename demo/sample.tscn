@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvlgfg3jgcmbp"]
+
+[ext_resource type="Script" path="res://sample.gd" id="1_d1b0d"]
+[ext_resource type="Texture2D" uid="uid://cvsn70wyesmjb" path="res://icon.svg" id="2_o3w2l"]
+
+[node name="Sample" type="Node"]
+script = ExtResource("1_d1b0d")
+
+[node name="HelloWorld" type="HelloWorld" parent="."]
+speed = 100.0
+position = Vector2(561, 329)
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="HelloWorld"]
+texture = ExtResource("2_o3w2l")
+
+[connection signal="hello_world_signal" from="HelloWorld" to="." method="_on_hello_world_hello_world_signal"]

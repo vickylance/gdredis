@@ -1,0 +1,3 @@
+* linguist-vendored
+* text=auto eol=lf
+*.cpp linguist-vendored=false
