@@ -20,6 +20,7 @@ target = "{}{}".format(
 # - LINKFLAGS are for linking flags
 
 sources = [Glob("src/*.cpp")]
+
 # hiredis = Glob("lib/hiredis/*.c")
 # openssl = Glob("lib/openssl/*.c")
 
@@ -29,13 +30,18 @@ sources = [Glob("src/*.cpp")]
 # tweak this if you want to use different folders, or more folders, to store your source code in.
 includes = [
     "src/",
+    # "src/hiredis/",
+    # "/opt/homebrew/Cellar/openssl@1.1/1.1.1w/include",
+    # "src/openssl/include",
     # "lib/hiredis/",
-    # "/opt/homebrew/Cellar/hiredis/1.2.0/include",
+    "/opt/homebrew/Cellar/hiredis/1.2.0/include",
     # "/opt/homebrew/Cellar/openssl@3/3.1.3/include"
 ]
 env.Append(CPPPATH=includes)
-# env.Append(LIBPATH=["./lib/hiredis"])
-# env.Append(LIBS=["hiredis", "openssl"])
+env.Append(LIBPATH=["/opt/homebrew/Cellar/hiredis/1.2.0/lib"])
+# env.Append(LIBPATH=["./src/hiredis",
+#            "/opt/homebrew/Cellar/openssl@1.1/1.1.1w/lib"])
+env.Append(LIBS=["hiredis"])
 
 if env["platform"] == "macos":
     target = "{}.{}.{}.framework/{}.{}.{}".format(

@@ -4,7 +4,7 @@
 #include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/input.hpp>
-// #include <hiredis/hiredis.h>
+#include <hiredis/hiredis.h>
 
 using namespace godot;
 
@@ -27,43 +27,45 @@ HelloWorld::HelloWorld()
         set_process_mode(Node::ProcessMode::PROCESS_MODE_DISABLED);
     }
     UtilityFunctions::print("Hello World");
-    // redisContext *context = redisConnect("localhost", 6379);
-    // if (context == NULL || context->err)
-    // {
-    //     if (context)
-    //     {
-    //         UtilityFunctions::print("Connection error: %s\n", context->errstr);
-    //         redisFree(context);
-    //     }
-    //     else
-    //     {
-    //         UtilityFunctions::print("Connection error: Can't allocate redis context\n");
-    //     }
-    //     exit(1);
-    // }
 
-    // UtilityFunctions::print("Redis connection successful");
+    redisContext *context = redisConnect("localhost", 6379);
+    if (context == NULL || context->err)
+    {
+        if (context)
+        {
+            UtilityFunctions::print("Connection error: %s\n", context->errstr);
+            redisFree(context);
+        }
+        else
+        {
+            UtilityFunctions::print("Connection error: Can't allocate redis context\n");
+        }
+        exit(1);
+    }
 
-    // // SET a key-value pair
-    // redisReply *reply = (redisReply *)redisCommand(context, "SET mykey myvalue");
-    // if (reply == NULL)
-    // {
-    //     UtilityFunctions::print("SET failed\n");
-    //     exit(1);
-    // }
-    // freeReplyObject(reply);
+    UtilityFunctions::print("Redis connection successful");
 
-    // // GET the value of a key
-    // reply = redisCommand(context, "GET mykey");
-    // if (reply == NULL)
-    // {
-    //     UtilityFunctions::print("GET failed\n");
-    //     exit(1);
-    // }
-    // UtilityFunctions::print("GET mykey: %s\n", reply->str);
-    // freeReplyObject(reply);
+    // SET a key-value pair
+    redisReply *reply = (redisReply *)redisCommand(context, "SET mykey myvalue");
+    if (reply == NULL)
+    {
+        UtilityFunctions::print("SET failed\n");
+        exit(1);
+    }
+    freeReplyObject(reply);
+    UtilityFunctions::print("Redis SET successful");
 
-    // redisFree(context);
+    // GET the value of a key
+    redisReply *getReply = (redisReply *)redisCommand(context, "GET mykey");
+    if (getReply == NULL)
+    {
+        UtilityFunctions::print("GET failed\n");
+        exit(1);
+    }
+    UtilityFunctions::print("GET mykey: ", getReply->str);
+    freeReplyObject(getReply);
+
+    redisFree(context);
 }
 
 HelloWorld::~HelloWorld()

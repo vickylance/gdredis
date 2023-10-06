@@ -6,3 +6,7 @@
 	path = src/hiredis
 	url = https://github.com/redis/hiredis.git
     branch = v1.2.0
+[submodule "src/openssl"]
+	path = src/openssl
+	url = https://github.com/openssl/openssl.git
+    branch = openssl-3.1.3
